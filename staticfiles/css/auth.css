@@ -1,0 +1,287 @@
+/* =========================================
+   AUTH.CSS — Login, Register, Reset pages
+   ========================================= */
+
+/* ─── Auth Layout ─── */
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* ─── Left Panel (Visual Side) ─── */
+.auth-visual {
+  position: relative;
+  background: var(--bg-secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 3rem;
+  overflow: hidden;
+}
+
+.auth-visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 50%, rgba(79, 255, 176, 0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 80%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
+}
+
+.auth-visual-content {
+  position: relative;
+  z-index: 1;
+}
+
+.auth-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3rem;
+}
+.auth-logo .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse-glow 2s infinite;
+  flex-shrink: 0;
+}
+
+.auth-visual h1 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+.auth-visual h1 .highlight {
+  color: var(--accent);
+  display: block;
+}
+
+.auth-visual p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  max-width: 340px;
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.auth-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.auth-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+}
+.auth-features li .check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-dim);
+  border: 1px solid var(--border-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-size: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* Auth Visual decoration */
+.auth-code-preview {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  background: rgba(6, 9, 16, 0.6);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+  backdrop-filter: blur(10px);
+}
+.auth-code-preview .c-green { color: var(--accent); }
+.auth-code-preview .c-purple { color: #a78bfa; }
+.auth-code-preview .c-blue { color: #60a5fa; }
+
+/* ─── Right Panel (Form Side) ─── */
+.auth-form-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  overflow-y: auto;
+}
+
+.auth-form-wrapper {
+  width: 100%;
+  max-width: 420px;
+}
+
+.auth-form-header {
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease;
+}
+
+.auth-form-header .form-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.auth-form-header h2 {
+  font-size: 1.8rem;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+
+.auth-form-header p {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+/* ─── Auth Form Box ─── */
+.auth-form-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  backdrop-filter: blur(20px);
+  animation: fadeIn 0.5s ease 0.1s both;
+}
+
+.auth-form-box .btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+.auth-form-box .btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+.auth-form-box .btn-primary:hover::after {
+  transform: translateX(100%);
+}
+
+/* ─── Auth Footer ─── */
+.auth-form-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  animation: fadeIn 0.5s ease 0.2s both;
+}
+
+/* ─── Password strength ─── */
+.password-strength {
+  margin-top: 8px;
+}
+.strength-bar {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--border-glass);
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+.strength-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.strength-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+}
+.strength-weak   .strength-fill { width: 25%; background: var(--danger); }
+.strength-fair   .strength-fill { width: 50%; background: var(--warning); }
+.strength-good   .strength-fill { width: 75%; background: #60a5fa; }
+.strength-strong .strength-fill { width: 100%; background: var(--accent); }
+
+/* ─── OTP / Code Input ─── */
+.otp-inputs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+.otp-input {
+  width: 50px;
+  height: 56px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  font-weight: 700;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  transition: all var(--transition);
+  outline: none;
+}
+.otp-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(79, 255, 176, 0.1);
+}
+
+/* ─── Social Login (optional placeholders) ─── */
+.social-btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+.btn-social {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-sm);
+  padding: 10px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--transition);
+  text-decoration: none;
+}
+.btn-social:hover {
+  border-color: var(--border-accent);
+  color: var(--text-primary);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .auth-page {
+    grid-template-columns: 1fr;
+  }
+  .auth-visual {
+    display: none;
+  }
+  .auth-form-side {
+    padding: 2rem 1.25rem;
+    min-height: 100vh;
+  }
+}

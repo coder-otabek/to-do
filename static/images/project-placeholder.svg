@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="360" viewBox="0 0 640 360">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1220"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4fffb0" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" fill="url(#bg)"/>
+  <!-- Grid lines -->
+  <line x1="0" y1="60" x2="640" y2="60" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <line x1="0" y1="120" x2="640" y2="120" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <line x1="0" y1="180" x2="640" y2="180" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <line x1="0" y1="240" x2="640" y2="240" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <line x1="0" y1="300" x2="640" y2="300" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <line x1="107" y1="0" x2="107" y2="360" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <line x1="214" y1="0" x2="214" y2="360" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <line x1="320" y1="0" x2="320" y2="360" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <line x1="427" y1="0" x2="427" y2="360" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <line x1="534" y1="0" x2="534" y2="360" stroke="#4fffb0" stroke-width="0.3" stroke-opacity="0.15"/>
+  <!-- Browser mockup -->
+  <rect x="160" y="70" width="320" height="220" rx="8" fill="#0a0f1e" stroke="#4fffb0" stroke-width="1" stroke-opacity="0.3"/>
+  <rect x="160" y="70" width="320" height="32" rx="8" fill="#111827"/>
+  <rect x="160" y="90" width="320" height="12" fill="#111827"/>
+  <circle cx="180" cy="86" r="5" fill="#ff4f6a" fill-opacity="0.7"/>
+  <circle cx="198" cy="86" r="5" fill="#ffc947" fill-opacity="0.7"/>
+  <circle cx="216" cy="86" r="5" fill="#4fffb0" fill-opacity="0.7"/>
+  <rect x="235" y="79" width="160" height="14" rx="4" fill="#1a2540"/>
+  <!-- Code lines -->
+  <rect x="180" y="118" width="80" height="6" rx="2" fill="#4fffb0" fill-opacity="0.5"/>
+  <rect x="180" y="132" width="120" height="6" rx="2" fill="#7c3aed" fill-opacity="0.4"/>
+  <rect x="190" y="146" width="90" height="6" rx="2" fill="#60a5fa" fill-opacity="0.4"/>
+  <rect x="190" y="160" width="110" height="6" rx="2" fill="#4fffb0" fill-opacity="0.3"/>
+  <rect x="180" y="174" width="70" height="6" rx="2" fill="#7c3aed" fill-opacity="0.4"/>
+  <rect x="350" y="118" width="100" height="70" rx="4" fill="#4fffb0" fill-opacity="0.05" stroke="#4fffb0" stroke-width="0.5" stroke-opacity="0.3"/>
+  <rect x="362" y="130" width="76" height="4" rx="2" fill="#4fffb0" fill-opacity="0.4"/>
+  <rect x="362" y="142" width="60" height="4" rx="2" fill="#4fffb0" fill-opacity="0.25"/>
+  <rect x="362" y="154" width="70" height="4" rx="2" fill="#4fffb0" fill-opacity="0.2"/>
+  <rect x="362" y="166" width="50" height="4" rx="2" fill="#4fffb0" fill-opacity="0.15"/>
+  <!-- Bottom bar -->
+  <rect x="160" y="260" width="320" height="30" fill="#0d1220"/>
+  <rect x="175" y="270" width="60" height="10" rx="3" fill="#4fffb0" fill-opacity="0.6"/>
+  <rect x="245" y="270" width="40" height="10" rx="3" fill="#1a2540"/>
+  <!-- Glow -->
+  <ellipse cx="320" cy="180" rx="200" ry="130" fill="#4fffb0" fill-opacity="0.02"/>
+  <!-- Label -->
+  <text x="320" y="338" font-family="monospace" font-size="12" fill="#4fffb0" fill-opacity="0.4" text-anchor="middle" letter-spacing="4">PROJECT PREVIEW</text>
+</svg>

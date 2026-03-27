@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Kirish | DevPortfolio</title>
+    <style>
+        body { background: #0a0a0c; color: white; font-family: 'Manrope', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .login-card { background: #141417; padding: 40px; border-radius: 24px; border: 1px solid rgba(255,255,255,0.05); width: 100%; max-width: 380px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 0.85rem; color: #9494a5; font-family: monospace; }
+        input { width: 100%; padding: 12px; background: #1c1c21; border: 1px solid #2d2d35; border-radius: 12px; color: white; outline: none; transition: 0.3s; box-sizing: border-box; }
+        input:focus { border-color: #00f2ff; box-shadow: 0 0 10px rgba(0,242,255,0.1); }
+        .btn-login { width: 100%; padding: 14px; background: #00f2ff; color: #000; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-login:hover { transform: scale(1.02); filter: brightness(1.1); }
+        .links { margin-top: 20px; text-align: center; font-size: 0.85rem; }
+        a { color: #00f2ff; text-decoration: none; opacity: 0.8; }
+        a:hover { opacity: 1; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h2 style="margin-top:0; letter-spacing:-1px;">Xush kelibsiz!</h2>
+        <p style="color:#9494a5; font-size:0.9rem; margin-bottom:30px;">Tizimga kirish uchun ma'lumotlarni kiriting.</p>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>// username</label>
+                {{ form.username }}
+            </div>
+            <div class="form-group">
+                <label>// password</label>
+                {{ form.password }}
+            </div>
+            <button type="submit" class="btn-login">TIZIANA KIRISH</button>
+        </form>
+
+        <div class="links">
+            <a href="/forgot_password">Parolni unutdingizmi?</a><br><br>
+            <span style="color:#555">Hisobingiz yo'qmi?</span> <a href="/register">Ro'yxatdan o'ting</a>
+        </div>
+    </div>
+</body>
+</html>

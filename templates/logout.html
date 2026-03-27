@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Chiqish</title>
+    <style>
+        body { background: #0a0a0c; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        .card { text-align: center; background: #141417; padding: 50px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.05); max-width: 400px; }
+        .btn-confirm { background: #ff453a; color: white; border: none; padding: 12px 30px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        .btn-cancel { background: transparent; color: #9494a5; border: 1px solid #333; padding: 12px 30px; border-radius: 10px; text-decoration: none; margin-left: 10px; display: inline-block; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div style="font-size: 4rem; margin-bottom: 20px;">👋</div>
+        <h2>Chiqmoqchimisiz?</h2>
+        <p style="color:#9494a5; margin-bottom:30px;">Hisobingizdan chiqmoqchi ekanligingizni tasdiqlang.</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn-confirm">HA, CHIQISH</button>
+            <a href="/profile" class="btn-cancel">YO'Q, QOLISH</a>
+        </form>
+    </div>
+</body>
+</html>

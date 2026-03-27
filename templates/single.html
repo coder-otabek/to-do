@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block title %}Tahrirlash | MyToDo{% endblock %}
+
+{% block extra_css %}
+<style>
+    .edit-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 40px;
+        max-width: 640px;
+        margin: 0 auto;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    .edit-header {
+        margin-bottom: 32px;
+    }
+    .edit-header h2 {
+        font-size: 1.8rem;
+        letter-spacing: -1px;
+        margin-top: 8px;
+    }
+
+    .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 24px 0;
+    }
+
+    /* Override Django form widget styles */
+    .edit-card select,
+    .edit-card input[type="text"],
+    .edit-card input[type="date"],
+    .edit-card input[type="datetime-local"],
+    .edit-card textarea,
+    .edit-card input:not([type="submit"]) {
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        color: var(--text);
+        padding: 11px 14px;
+        width: 100%;
+        outline: none;
+        transition: 0.3s;
+        font-family: 'Manrope', sans-serif;
+        font-size: 0.9rem;
+        margin-bottom: 0;
+    }
+    .edit-card select:focus,
+    .edit-card input:focus,
+    .edit-card textarea:focus {
+        border-color: var(--accent);
+        background: rgba(0,242,255,0.04);
+        box-shadow: 0 0 0 3px rgba(0,242,255,0.08);
+    }
+
+    /* form.as_p paragraph styling */
+    .edit-card p {
+        margin-bottom: 18px;
+    }
+    .edit-card p label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin-bottom: 7px;
+    }
+
+    .action-row {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 8px;
+    }
+
+    .btn-save {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 13px 28px;
+        background: var(--accent);
+        color: #000;
+        border: none;
+        border-radius: 12px;
+        font-weight: 800;
+        font-family: 'Space Mono', monospace;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .btn-save:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px var(--accent-glow);
+    }
+
+    .spacer { flex: 1; }
+</style>
+{% endblock %}
+
+{% block content %}
+<div style="margin-bottom: 20px;">
+    <a href="/" class="btn btn-ghost">
+        <i class='bx bx-arrow-back'></i> Orqaga
+    </a>
+</div>
+
+<div class="edit-card">
+    <div class="edit-header">
+        <span class="mono-tag">// edit_task</span>
+        <h2>Vazifani tahrirlash</h2>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div class="divider"></div>
+
+        <div class="action-row">
+            <button type="submit" class="btn-save">
+                <i class='bx bx-save'></i> Saqlash
+            </button>
+            <a href="/" class="btn btn-ghost">Bekor qilish</a>
+            <div class="spacer"></div>
+            <a href="/delete/{{ todo.id }}/" class="btn btn-danger">
+                <i class='bx bx-trash'></i> O'chirish
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
