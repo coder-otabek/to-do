@@ -1,3 +1,4 @@
+```html
 {% extends 'base.html' %}
 
 {% block title %}Vazifalar | MyToDo{% endblock %}
@@ -110,7 +111,7 @@
         z-index: 100;
         box-shadow: 0 15px 30px rgba(0,0,0,0.4);
     }
-    .priority-dropdown:hover .priority-menu { display: block; }
+    .priority-menu.active { display: block; }
     .priority-menu a {
         display: block;
         padding: 8px 12px;
@@ -240,11 +241,11 @@
             <a href="/?status=2" class="pill done">Tugallandi</a>
             <a href="/?status=3" class="pill cancel">Bekor</a>
 
-            <div class="priority-dropdown">
-                <span class="pill" style="cursor:pointer;">
+            <div class="priority-dropdown" id="priorityDropdown">
+                <span class="pill" style="cursor:pointer;" id="priorityBtn">
                     <i class='bx bx-sort-alt-2'></i> Muhimlik <i class='bx bx-chevron-down'></i>
                 </span>
-                <div class="priority-menu">
+                <div class="priority-menu" id="priorityMenu">
                     <a href="?priority=0">↓↓ Eng past</a>
                     <a href="?priority=1">↓ Past</a>
                     <a href="?priority=2">— O'rta</a>
@@ -307,3 +308,20 @@
 {% endif %}
 
 {% endblock %}
+
+{% block extra_js %}
+<script>
+    const btn  = document.getElementById('priorityBtn');
+    const menu = document.getElementById('priorityMenu');
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        menu.classList.toggle('active');
+    });
+
+    document.addEventListener('click', () => {
+        menu.classList.remove('active');
+    });
+</script>
+{% endblock %}
+```
