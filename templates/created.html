@@ -3,6 +3,7 @@
 {% block title %}Yangi vazifa | MyToDo{% endblock %}
 
 {% block extra_css %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
 <style>
     .form-card {
         background: var(--card);
@@ -71,12 +72,12 @@
         margin: 24px 0;
     }
 
-    /* Override Django form widget styles */
     .form-card select,
     .form-card input[type="text"],
     .form-card input[type="date"],
     .form-card input[type="datetime-local"],
-    .form-card textarea {
+    .form-card textarea,
+    .form-card .flatpickr-input {
         background: rgba(255,255,255,0.03);
         border: 1px solid rgba(255,255,255,0.1);
         border-radius: 10px;
@@ -87,13 +88,106 @@
         transition: 0.3s;
         font-family: 'Manrope', sans-serif;
         font-size: 0.9rem;
+        box-sizing: border-box;
     }
     .form-card select:focus,
     .form-card input:focus,
-    .form-card textarea:focus {
+    .form-card textarea:focus,
+    .form-card .flatpickr-input:focus {
         border-color: var(--accent);
         background: rgba(0,242,255,0.04);
         box-shadow: 0 0 0 3px rgba(0,242,255,0.08);
+    }
+
+    /* Flatpickr dark theme */
+    .flatpickr-calendar {
+        background: var(--card) !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 16px !important;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.4) !important;
+        color: var(--text) !important;
+    }
+    .flatpickr-day {
+        color: var(--text) !important;
+    }
+    .flatpickr-day.selected,
+    .flatpickr-day.selected:hover,
+    .flatpickr-day.startRange,
+    .flatpickr-day.endRange {
+        background: var(--accent) !important;
+        border-color: var(--accent) !important;
+        color: #000 !important;
+        font-weight: 700;
+    }
+    .flatpickr-day:hover {
+        background: rgba(0,242,255,0.1) !important;
+        color: var(--text) !important;
+    }
+    .flatpickr-day.today {
+        border-color: var(--accent) !important;
+    }
+    .flatpickr-day.flatpickr-disabled,
+    .flatpickr-day.flatpickr-disabled:hover {
+        color: rgba(255,255,255,0.2) !important;
+        cursor: not-allowed;
+    }
+    .flatpickr-months .flatpickr-month {
+        background: transparent !important;
+        color: var(--text) !important;
+        fill: var(--text) !important;
+    }
+    .flatpickr-months .flatpickr-prev-month,
+    .flatpickr-months .flatpickr-next-month {
+        fill: var(--text) !important;
+        color: var(--text) !important;
+    }
+    .flatpickr-months .flatpickr-prev-month:hover svg,
+    .flatpickr-months .flatpickr-next-month:hover svg {
+        fill: var(--accent) !important;
+    }
+    .flatpickr-weekdays {
+        background: transparent !important;
+    }
+    span.flatpickr-weekday {
+        background: transparent !important;
+        color: var(--accent) !important;
+        font-weight: 700;
+        font-size: 0.75rem;
+    }
+    .flatpickr-current-month .flatpickr-monthDropdown-months {
+        background: var(--card) !important;
+        color: var(--text) !important;
+    }
+    .flatpickr-current-month input.cur-year {
+        color: var(--text) !important;
+    }
+    .numInputWrapper:hover {
+        background: rgba(255,255,255,0.05) !important;
+    }
+    .numInputWrapper span.arrowUp:after {
+        border-bottom-color: var(--text) !important;
+    }
+    .numInputWrapper span.arrowDown:after {
+        border-top-color: var(--text) !important;
+    }
+    /* Time picker */
+    .flatpickr-time {
+        border-top: 1px solid var(--border) !important;
+        background: var(--card) !important;
+    }
+    .flatpickr-time input,
+    .flatpickr-time .flatpickr-am-pm {
+        background: transparent !important;
+        color: var(--text) !important;
+    }
+    .flatpickr-time input:focus,
+    .flatpickr-time .flatpickr-am-pm:focus,
+    .flatpickr-time input:hover,
+    .flatpickr-time .flatpickr-am-pm:hover {
+        background: rgba(0,242,255,0.08) !important;
+    }
+    .flatpickr-time .flatpickr-time-separator {
+        color: var(--text) !important;
     }
 </style>
 {% endblock %}
@@ -152,4 +246,20 @@
         </div>
     </form>
 </div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/l10n/uz.js"></script>
+<script>
+    flatpickr("#id_deadline", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        minDate: "today",
+        time_24hr: true,
+        locale: "uz",
+        disableMobile: false,
+        animate: true,
+    });
+</script>
 {% endblock %}
