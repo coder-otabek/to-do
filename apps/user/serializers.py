@@ -155,62 +155,73 @@ class ChangeUserPhotoSerializer(serializers.Serializer):
 
 
 class LoginSerializer(TokenObtainPairSerializer):
+    userinput = serializers.CharField(required=True)
+
     def __init__(self, *args, **kwargs):
         super(LoginSerializer, self).__init__(*args, **kwargs)
-        self.fields['username'] = serializers.CharField(required=True)
-        self.fields['userinput'] = serializers.CharField(required=True)
-    def aut_validete(self,data):
-        user_input = data.get('userinput')
-        if check_user_type(user_input) == 'usernaem':
-            username = user_input
-        elif check_user_type(user_input) == 'email':
-            user= self.get_user(email__iexact=user_input)
-            username = user.username
-        elif check_user_type(user_input) == 'phone':
-            user = self.get_user(phone_number=user_input)
-            username = user.username
-        else:
-            data = {
-                'success': False,
-                'message' : 'Siz email,username yoki telefon raqam kiritishingiz kerak'
-            }
-            raise ValidationError(data)
-        authentication_kwargs = {
-            self.username_field: username,
-            'password': data['password'],
-        }
-        current_user = User.objects.filter(username__iexact=username).first()
+        if 'username' in self.fields:
+            self.fields.pop('username')
 
-        if current_user is not None and current_user.status in [CODE_VERIFIED, NEW]:
-            raise ValidationError({
-                'success': False,
-                'message' : "Siz ro'yxatdan o'tmagansiz"
-            })
-        user = authenticate(**authentication_kwargs)
-        if user is not None:
-            self.user = user
-
-        else:
-            raise ValidationError({
-                'success': False,
-                'message' : "Ma'lumotlar to'gri emas"
-            })
-    def validate(self, data):
-        self.aut_validete(data)
-        if self.user.status not in [DONE,PHOTO_DONE]:
-            raise PermissionDenied("Siz login qila olmaysiz ruxsatingiz yo'q")
-        data = self.user.token()
-        data['status'] = self.user.status
-        data['full_name'] = self.user.full_name
-        return data
     def get_user(self, **kwargs):
         users = User.objects.filter(**kwargs)
         if not users.exists():
             raise ValidationError({
                 'success': False,
-                'message':'Akount active emas'
+                'message': 'Akount topilmadi yoki faol emas'
             })
         return users.first()
+
+    def auth_validate(self, data):
+        user_input = data.get('userinput')
+        password = data.get('password')
+        user_type = check_user_type(user_input)
+
+        if user_type == 'username':
+            username = user_input
+        elif user_type == 'email':
+            user = self.get_user(email__iexact=user_input)
+            username = user.username
+        elif user_type == 'phone':
+            # models.py da 'phone' maydoni borligini tekshiring
+            user = self.get_user(phone=user_input)
+            username = user.username
+        else:
+            raise ValidationError({
+                'success': False,
+                'message': 'Siz email, username yoki telefon raqam kiritishingiz kerak'
+            })
+
+        current_user = User.objects.filter(username__iexact=username).first()
+        if current_user is not None and current_user.status in [CODE_VERIFIED, NEW]:
+            raise ValidationError({
+                'success': False,
+                'message': "Siz hali to'liq ro'yxatdan o'tmagansiz"
+            })
+
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            self.user = user
+        else:
+            raise ValidationError({
+                'success': False,
+                'message': "Ma'lumotlar noto'g'ri"
+            })
+
+    def validate(self, data):
+        self.auth_validate(data)
+        if self.user.status not in [DONE, PHOTO_DONE]:
+            raise PermissionDenied("Siz login qila olmaysiz, ruxsatingiz yo'q")
+
+        refresh = self.get_token(self.user)
+        data = {
+            'access': str(refresh.access_token),
+            'refresh_token': str(refresh),
+            'status': self.user.status,
+            'full_name': self.user.full_name
+        }
+        return data
+
+
 class LoginRefreshSerializer(TokenRefreshSerializer):
     def validate(self, data):
         data = super().validate(attrs)
