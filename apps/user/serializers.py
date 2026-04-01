@@ -9,7 +9,7 @@ from rest_framework.exceptions import ValidationError, PermissionDenied, NotFoun
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 from rest_framework_simplejwt.tokens import AccessToken
 
-from shared.utiliy import send_email, check_email_or_phone, check_user_type
+from apps.shared.utiliy import send_email, check_email_or_phone, check_user_type
 from .models import User, VIA_PHONE, VIA_EMAIL, CODE_VERIFIED, NEW, DONE, PHOTO_DONE, Todo
 
 
